@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<title>Fær Øer 2027</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" name="viewport"/>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai"/>
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet"/>
+<meta name="bingbot" content="noindex, nofollow, noarchive"/>
+<meta name="referrer" content="no-referrer"/>
+<meta content="#0a1619" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link id="app-manifest" rel="manifest" href="manifest.webmanifest"/>
+<link id="fav-icon" rel="icon" type="image/svg+xml"/>
+<link id="apple-icon" rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<style>
+/* Layout: colonna unica da telefono (max 480px), header a fasce + tab in basso, come Islanda e Tenerife.
+   Palette: mare d'ardesia, erba dei tetti, becco del puffin, rosso della croce faroese. Solo tema scuro, scelto. */
+:root {
+  color-scheme: dark;
+  --paper: #0a1619;
+  --card: #11242a;
+  --surface2: #18333b;
+  --surface3: #21434d;
+  --ocean: #6cc3d5;
+  --ocean-dark: #2f8aa0;
+  --sun: #f39a3c;          /* puffin */
+  --sun-light: #ffc07a;
+  --lava: #e4504a;         /* rosso della croce */
+  --aqua: #82d394;         /* erba dei tetti */
+  --sand: #e6dcc6;
+  --text: #e3eef0;
+  --muted: #7e9ba2;
+  --muted-light: #a9c3c8;
+  --shade: rgba(4,12,14,0.55);
+  --line: rgba(0,0,0,0.28);
+  --border: rgba(108,195,213,0.13);
+  --border2: rgba(108,195,213,0.24);
+  --radius: 16px;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { background: var(--paper); }
+body { font-family: var(--font-body); background: var(--paper); color: var(--text); min-height: 100vh; max-width: 480px; margin: 0 auto; position: relative; overflow-x: clip; font-size: 14px; }
+a { color: var(--ocean); }
+:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ===== HEADER ===== */
+.app-header { background: linear-gradient(165deg, #1d4a55 0%, #12323a 50%, #0a1619 100%); color: #fff; padding: calc(44px + env(safe-area-inset-top)) 24px 26px; position: relative; overflow: hidden; border-bottom: 4px solid var(--aqua); }
+.app-header::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(243,154,60,0.25) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 0% 110%, rgba(130,211,148,0.18) 0%, transparent 60%); }
+.hills { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; pointer-events: none; opacity: .5; }
+.header-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 8px; position: relative; z-index: 1; }
+.header-title { font-family: var(--font-display); font-size: 58px; font-weight: 700; line-height: .95; color: #fff; margin-bottom: 6px; letter-spacing: 1px; position: relative; z-index: 1; text-transform: uppercase; }
+.header-title em { font-style: normal; color: var(--sun-light); }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.75); margin-bottom: 18px; letter-spacing: .5px; position: relative; z-index: 1; }
+.header-pills { display: flex; gap: 8px; flex-wrap: wrap; position: relative; z-index: 1; }
+.pill { background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.35); border-radius: 4px; padding: 4px 10px; font-size: 10px; color: #fff; display: flex; align-items: center; gap: 5px; font-weight: 700; }
+.pill.countdown { background: rgba(243,154,60,0.2); border-color: rgba(243,154,60,0.6); color: var(--sun-light); }
+.header-flag { position: absolute; top: calc(18px + env(safe-area-inset-top)); right: 20px; width: 60px; height: 44px; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.4); z-index: 2; }
+
+/* ===== CONTENT ===== */
+.tab-content { display: none; padding: 20px 16px 120px; }
+.tab-content.active { display: block; }
+.section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--aqua); margin: 24px 0 12px; font-weight: 800; }
+.section-label:first-child { margin-top: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 14px; font-size: 10px; color: var(--muted-light); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.i-noi { background: var(--sun); } .i-lib { border: 1.5px dashed var(--sun); } .i-log { background: var(--muted); } .i-volo { background: var(--lava); } .i-free { background: var(--aqua); }
+.assumption { background: rgba(243,154,60,0.08); border: 1px solid rgba(243,154,60,0.35); border-radius: 10px; padding: 10px 12px; font-size: 12px; color: var(--muted-light); line-height: 1.5; margin-bottom: 14px; }
+.assumption b { color: var(--sun-light); }
+
+/* ===== GIORNO ===== */
+.giorno-card { background: var(--card); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; border: 0.5px solid var(--border); }
+.giorno-header { display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer; }
+.giorno-num { width: 42px; height: 42px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--ocean); color: var(--ocean); font-family: var(--font-display); font-size: 26px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.giorno-card.edi .giorno-num { border-color: var(--sand); color: var(--sand); }
+.giorno-meta { flex: 1; min-width: 0; }
+.giorno-data { font-size: 10px; color: var(--muted); margin-bottom: 3px; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; }
+.giorno-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: .3px; line-height: 1.05; text-wrap: balance; }
+.giorno-sotto { font-size: 11px; color: var(--muted-light); margin-top: 3px; font-style: italic; }
+.giorno-costo { font-size: 10px; color: var(--aqua); font-weight: 800; margin-top: 4px; }
+.giorno-badge { font-size: 8px; padding: 3px 8px; border-radius: 3px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.badge-isole { background: rgba(108,195,213,0.12); color: var(--ocean); border: 0.5px solid rgba(108,195,213,0.3); }
+.badge-trek { background: rgba(130,211,148,0.12); color: var(--aqua); border: 0.5px solid rgba(130,211,148,0.3); }
+.badge-edi { background: rgba(230,220,198,0.12); color: var(--sand); border: 0.5px solid rgba(230,220,198,0.3); }
+.badge-volo { background: rgba(228,80,74,0.13); color: #f08a84; border: 0.5px solid rgba(228,80,74,0.3); }
+.giorno-body { display: none; padding: 0 14px 16px; border-top: 0.5px solid var(--border); }
+.giorno-body.open { display: block; }
+.giorno-quote { font-size: 12px; color: var(--muted-light); padding: 12px 2px 10px; border-bottom: 0.5px solid var(--border); margin-bottom: 8px; line-height: 1.5; }
+
+/* ===== BLOCCHI ===== */
+.blocco { display: grid; grid-template-columns: 58px 1fr; gap: 10px; padding: 9px 0; border-bottom: 0.5px solid var(--line); }
+.blocco:last-child { border-bottom: none; }
+.bl-ora { font-size: 11px; font-weight: 800; color: var(--ocean); padding-top: 3px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.bl-ora small { display: block; font-size: 9px; color: var(--muted); font-weight: 700; }
+.bl-ora .stima { color: var(--muted); }
+.bl-main { min-width: 0; border-left: 3px solid var(--sun); padding-left: 10px; border-radius: 2px; }
+.bl-titolo { font-size: 13.5px; font-weight: 800; color: var(--text); line-height: 1.3; }
+.bl-desc { font-size: 12px; color: var(--muted-light); margin-top: 2px; line-height: 1.45; }
+.bl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.tag { font-size: 9px; padding: 2px 7px; border-radius: 3px; background: var(--surface2); color: var(--muted-light); border: 0.5px solid var(--border); font-weight: 800; letter-spacing: .5px; text-transform: uppercase; }
+.tag.free { color: var(--aqua); border-color: rgba(130,211,148,0.4); background: rgba(130,211,148,0.08); }
+.tag.cost { color: var(--sun); border-color: rgba(243,154,60,0.4); background: rgba(243,154,60,0.08); }
+.tag.book { color: var(--lava); border-color: rgba(228,80,74,0.4); background: rgba(228,80,74,0.1); }
+.tag.dur { color: var(--sun-light); border-color: rgba(243,154,60,0.3); }
+.tag.tbc { color: var(--muted-light); border-style: dashed; }
+.blocco.t-volo .bl-main { border-left-color: var(--lava); }
+.blocco.t-logistica .bl-main { border-left-color: var(--muted); }
+.blocco.t-logistica .bl-titolo { color: var(--muted-light); font-weight: 700; }
+.blocco.t-libero .bl-main { border: 1.5px dashed rgba(243,154,60,0.5); border-radius: 10px; padding: 10px 12px; background: rgba(243,154,60,0.04); }
+.blocco.t-libero .bl-titolo { color: var(--sun-light); }
+.blocco.t-libero .bl-ora { color: var(--sun); }
+.lib-note { margin-top: 8px; }
+.lib-note textarea { width: 100%; min-height: 44px; background: var(--shade); border: 0.5px solid var(--border2); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 12px; padding: 7px 9px; resize: vertical; }
+.lib-note textarea::placeholder { color: var(--muted); }
+.lib-note-hint { font-size: 9px; color: var(--muted); margin-top: 3px; }
+.place-link { color: var(--ocean); text-decoration: none; border-bottom: 1px dotted rgba(108,195,213,0.5); cursor: pointer; }
+.pernottamento { margin-top: 12px; background: var(--surface2); border-radius: 8px; border: 0.5px solid var(--border2); padding: 10px 12px; font-size: 12px; color: var(--muted-light); display: flex; gap: 8px; align-items: flex-start; }
+.pernottamento strong { color: var(--ocean); display: block; margin-bottom: 1px; font-size: 12px; }
+.slot-ideas { margin-top: 8px; font-size: 11px; color: var(--muted-light); }
+.slot-ideas a { color: var(--sun-light); text-decoration: none; border-bottom: 1px dotted rgba(243,154,60,0.5); cursor: pointer; }
+.info-note { background: var(--surface2); border-radius: 10px; padding: 12px 14px; font-size: 12px; color: var(--muted-light); line-height: 1.55; border: 0.5px solid var(--border); }
+.info-note strong { color: var(--text); }
+
+/* ===== IDEE ===== */
+.idea-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.idea-chip { background: var(--surface2); color: var(--muted-light); border: 0.5px solid var(--border2); border-radius: 999px; padding: 5px 11px; font-family: var(--font-body); font-size: 11px; font-weight: 800; cursor: pointer; }
+.idea-chip.on { background: rgba(243,154,60,0.15); color: var(--sun); border-color: rgba(243,154,60,0.5); }
+.idea-card { background: var(--card); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; border: 0.5px solid var(--border); }
+.idea-card.star { border-color: rgba(243,154,60,0.55); }
+.idea-head { display: flex; gap: 10px; align-items: flex-start; }
+.idea-icon { font-size: 24px; line-height: 1; padding-top: 2px; }
+.idea-titles { flex: 1; min-width: 0; }
+.idea-nome { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.3; }
+.idea-zona { font-size: 10px; color: var(--muted); font-weight: 800; letter-spacing: .5px; text-transform: uppercase; margin-top: 2px; }
+.idea-star { background: none; border: 0; font-size: 20px; cursor: pointer; padding: 0 2px; line-height: 1; filter: grayscale(1); opacity: .5; }
+.idea-card.star .idea-star { filter: none; opacity: 1; }
+.idea-desc { font-size: 12px; color: var(--muted-light); line-height: 1.5; margin-top: 8px; }
+.idea-facts { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.idea-fit { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.fit { display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--muted-light); border-radius: 8px; padding: 7px 10px; cursor: pointer; line-height: 1.4; background: rgba(130,211,148,0.06); border: 1px solid rgba(130,211,148,0.35); }
+.fit b { color: var(--aqua); font-size: 11px; }
+.fit.stretto { background: rgba(243,154,60,0.06); border-color: rgba(243,154,60,0.4); } .fit.stretto b { color: var(--sun); }
+.fit.variante { background: rgba(108,195,213,0.06); border-color: rgba(108,195,213,0.35); } .fit.variante b { color: var(--ocean); }
+
+/* ===== SPESE ===== */
+.sp-hero { background: linear-gradient(135deg, var(--surface2), var(--card)); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; border: 0.5px solid var(--border2); }
+.sp-hero-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+.sp-hero-val { font-family: var(--font-display); font-size: 52px; font-weight: 700; color: var(--sun); line-height: 1; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.sp-hero-sub { font-size: 11px; color: var(--muted-light); }
+.sp-meter { height: 10px; border-radius: 5px; background: var(--surface3); overflow: hidden; margin: 12px 0 5px; }
+.sp-meter i { display: block; height: 100%; background: var(--aqua); border-radius: 5px; }
+.sp-meter.over i { background: var(--lava); }
+.sp-meter-legend { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.sp-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.sp-mini { background: var(--shade); border-radius: 8px; padding: 10px; border: 0.5px solid var(--border); }
+.sp-mini-label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+.sp-mini-val { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text); margin-top: 3px; font-variant-numeric: tabular-nums; }
+.sp-mini-val.paid { color: var(--aqua); } .sp-mini-val.due { color: var(--lava); }
+.sp-budget-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 11px; color: var(--muted-light); }
+.sp-budget-row input { width: 90px; }
+.conv { background: var(--card); border-radius: 12px; border: 0.5px solid var(--border); padding: 12px 14px; margin-bottom: 16px; }
+.conv-title { font-size: 12px; font-weight: 800; margin-bottom: 8px; }
+.conv-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.conv-out { font-family: var(--font-display); font-size: 22px; color: var(--sun); font-weight: 600; font-variant-numeric: tabular-nums; }
+.sp-cat { background: var(--card); border-radius: 12px; margin-bottom: 12px; border: 0.5px solid var(--border); overflow: hidden; }
+.sp-cat-title { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; font-size: 12px; font-weight: 800; color: var(--text); border-bottom: 0.5px solid var(--border); }
+.sp-add-btn { background: var(--surface2); color: var(--ocean); border: 0.5px solid var(--border2); border-radius: 6px; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; font-family: var(--font-body); }
+.sp-form { display: none; padding: 10px 14px; background: var(--shade); border-bottom: 0.5px solid var(--border); }
+.sp-form.open { display: block; }
+.sp-form-row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.sp-input { flex: 1; background: var(--surface2); border: 0.5px solid var(--border2); border-radius: 6px; padding: 8px 10px; color: var(--text); font-family: var(--font-body); font-size: 12px; min-width: 0; }
+.sp-save-btn, .sp-cancel-btn { border-radius: 6px; padding: 8px 14px; font-size: 11px; font-weight: 800; cursor: pointer; font-family: var(--font-body); border: 0; }
+.sp-save-btn { background: var(--ocean-dark); color: #fff; } .sp-cancel-btn { background: var(--surface2); color: var(--muted-light); }
+.sp-err { font-size: 11px; color: var(--lava); }
+.sp-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 0.5px solid var(--line); }
+.sp-item.is-paid { opacity: .72; }
+.sp-toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+.sp-toggle input { opacity: 0; width: 0; height: 0; }
+.sp-toggle-slider { position: absolute; inset: 0; background: var(--surface3); border-radius: 20px; cursor: pointer; transition: .2s; }
+.sp-toggle-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: var(--muted-light); border-radius: 50%; transition: .2s; }
+.sp-toggle input:checked + .sp-toggle-slider { background: var(--aqua); }
+.sp-toggle input:checked + .sp-toggle-slider::before { transform: translateX(16px); background: var(--paper); }
+.sp-item-info { flex: 1; min-width: 0; }
+.sp-item-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.sp-item-name.paid-name { text-decoration: line-through; color: var(--muted); }
+.sp-item-note { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.sp-amt { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--sun); white-space: nowrap; background: none; border: 0; cursor: pointer; font-variant-numeric: tabular-nums; padding: 2px 0; text-align: right; }
+.sp-amt.stima { color: var(--muted-light); }
+.sp-amt.stima::before { content: '~'; color: var(--muted); }
+.sp-amt.paid-amount { color: var(--aqua); }
+.sp-amt-input { width: 84px; flex: none; text-align: right; }
+.sp-del-btn { background: transparent; border: 0; color: var(--lava); font-size: 14px; cursor: pointer; padding: 4px; }
+.sp-cat-total { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 11px; color: var(--muted); background: var(--shade); }
+.sp-cat-total strong { color: var(--text); font-variant-numeric: tabular-nums; }
+.sp-rate-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 6px; line-height: 1.5; }
+
+/* ===== INFO ===== */
+.volo-card { background: var(--card); border-radius: 12px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 0.5px solid var(--border); gap: 10px; }
+.volo-card > div:first-child { min-width: 0; }
+.volo-dir { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+.volo-route { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--text); margin: 2px 0; }
+.volo-details { font-size: 11px; color: var(--muted-light); line-height: 1.5; }
+.volo-num { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--sun); background: var(--surface2); padding: 8px 10px; border-radius: 8px; border: 0.5px solid rgba(243,154,60,0.3); white-space: nowrap; }
+.info-card { background: var(--card); border-radius: 12px; padding: 14px; margin-bottom: 10px; border: 0.5px solid var(--border); }
+.info-card-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.info-row { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 0.5px solid var(--line); font-size: 12px; }
+.info-row:last-child { border-bottom: none; }
+.info-key { color: var(--muted); flex-shrink: 0; max-width: 45%; }
+.info-val { color: var(--text); text-align: right; font-weight: 700; min-width: 0; }
+.info-val a { color: var(--ocean); text-decoration: none; }
+.warn { color: var(--sun-light); }
+.quote { font-size: 13px; color: var(--sand); font-style: italic; line-height: 1.55; padding: 12px 14px; border-left: 3px solid var(--aqua); background: rgba(130,211,148,0.06); border-radius: 0 10px 10px 0; margin-bottom: 10px; }
+
+/* ===== METEO ===== */
+.meteo-day-card { background: var(--card); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; border: 0.5px solid var(--border); }
+.meteo-day-num { width: 32px; height: 32px; border-radius: 6px; background: var(--surface2); color: var(--ocean); font-weight: 800; font-size: 11px; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); flex-shrink: 0; }
+.meteo-day-info { flex: 1; min-width: 0; }
+.meteo-day-data { font-size: 11px; color: var(--muted); font-weight: 800; }
+.meteo-day-desc { font-size: 13px; color: var(--text); font-weight: 700; margin: 2px 0; }
+.meteo-day-temps { font-size: 10px; color: var(--muted-light); font-variant-numeric: tabular-nums; }
+.meteo-day-temps em { color: var(--muted); }
+.meteo-icon { font-size: 28px; }
+.meteo-loading, .meteo-note { font-size: 11px; color: var(--muted); text-align: center; padding: 10px; }
+
+/* ===== NAV ===== */
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: rgba(10,22,25,0.96); backdrop-filter: blur(12px); border-top: 0.5px solid var(--border2); display: flex; padding: 8px 4px calc(8px + env(safe-area-inset-bottom)); z-index: 100; }
+.nav-btn { flex: 1; background: none; border: 0; color: var(--muted); font-family: var(--font-body); font-size: 10px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 4px 0; cursor: pointer; letter-spacing: .5px; }
+.nav-btn .n-icon { font-size: 20px; line-height: 1; }
+.nav-btn.active { color: var(--sun); }
+
+/* ===== INSTALL ===== */
+.install-fab { position: fixed; z-index: 201; right: max(14px, calc(50% - 226px)); bottom: calc(72px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 8px; padding: 9px 15px 9px 9px; background: #1d4a55; color: #fff; border: 1px solid var(--sun); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 800; box-shadow: 0 6px 22px rgba(0,0,0,.45); cursor: pointer; }
+.install-fab[hidden] { display: none; }
+.install-fab img { width: 26px; height: 26px; border-radius: 7px; display: block; }
+.install-toast { position: fixed; z-index: 202; left: 50%; transform: translateX(-50%); bottom: calc(124px + env(safe-area-inset-bottom)); width: calc(100% - 40px); max-width: 300px; background: var(--card); color: var(--text); border: 0.5px solid var(--border2); border-radius: 12px; padding: 12px 14px; font-size: 11px; line-height: 1.6; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+.install-toast[hidden] { display: none; }
+.install-toast b { color: var(--ocean); }
+
+/* ===== MAPS MODAL ===== */
+.maps-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 300; display: flex; align-items: flex-end; justify-content: center; }
+.maps-modal.hidden { display: none; }
+.maps-modal-box { width: 100%; max-width: 480px; background: var(--card); border-radius: 16px 16px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); border-top: 0.5px solid var(--border2); max-height: 80vh; overflow-y: auto; }
+.maps-modal-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+.maps-modal-title small { display: block; font-family: var(--font-body); font-size: 11px; color: var(--muted); font-weight: 600; }
+.maps-list { display: flex; flex-direction: column; gap: 8px; }
+.maps-list a, .maps-list button { display: block; background: var(--surface2); color: var(--text); border: 0.5px solid var(--border2); border-radius: 10px; padding: 12px; font-family: var(--font-body); font-size: 13px; font-weight: 700; text-align: left; cursor: pointer; text-decoration: none; }
+.maps-list .disabled { color: var(--muted); cursor: default; }
+.maps-hidden { display: none !important; }
+.maps-close-btn { margin-top: 12px; width: 100%; background: transparent; color: var(--muted-light); border: 0.5px solid var(--border); border-radius: 10px; padding: 10px; font-family: var(--font-body); font-size: 12px; cursor: pointer; }
+</style>
+</head>
+<body>
+<header class="app-header">
+<!-- Merkið, la bandiera faroese -->
+<svg aria-hidden="true" class="header-flag" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+<rect width="22" height="16" fill="#ffffff"/>
+<rect x="6" width="4" height="16" fill="#005EB8"/><rect y="6" width="22" height="4" fill="#005EB8"/>
+<rect x="7" width="2" height="16" fill="#EF3340"/><rect y="7" width="22" height="2" fill="#EF3340"/>
+</svg>
+<svg aria-hidden="true" class="hills" viewBox="0 0 480 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 70 L0 42 L60 18 L120 38 L190 8 L250 34 L320 20 L380 44 L440 26 L480 36 L480 70 Z" fill="#0a1619"/>
+</svg>
+<div class="header-eyebrow">Piano Viaggio · Andrea &amp; Michela</div>
+<h1 class="header-title"><em>Fær Øer</em> 2027</h1>
+<p class="header-sub">9–16 Giugno · Tórshavn + Edimburgo · budget contenuto</p>
+<div class="header-pills">
+<div class="pill"><span>✈️</span> MXP → FAE</div>
+<div class="pill"><span>🏰</span> + Edimburgo</div>
+<div class="pill"><span>📅</span> 8 giorni</div>
+<div class="pill countdown"><span>⏳</span> <span id="countdown">—</span></div>
+</div>
+</header>
+
+<!-- ========== PIANO ========== -->
+<div class="tab-content active" id="tab-piano">
+<div class="assumption"><b>Bozza.</b> Date ipotetiche: il volo Malpensa → Fær Øer è settimanale (2 giugno – 1 settembre 2027) e il giorno esatto si saprà all'apertura delle vendite. Orari con «~» sono stime.</div>
+<p class="section-label">8 giorni · 5 notti sulle isole + 2 a Edimburgo</p>
+<div class="legend">
+<span><i class="i-noi"></i> Attività</span>
+<span><i class="i-lib"></i> Slot libero</span>
+<span><i class="i-log"></i> Logistica</span>
+<span><i class="i-volo"></i> Volo</span>
+<span><i class="i-free"></i> Gratis</span>
+</div>
+<div id="piano-app"></div>
+<div class="info-note" style="margin-top:14px;">💡 Gli slot tratteggiati sono vuoti da riempire: scrivi un'idea nel campo note (resta sul telefono) oppure guarda la tab <strong>Idee</strong>, dove ogni tappa extra dice dove ci sta e quanto costa.</div>
+</div>
+
+<!-- ========== IDEE ========== -->
+<div class="tab-content" id="tab-idee"><div id="idee-app"></div></div>
+
+<!-- ========== SPESE ========== -->
+<div class="tab-content" id="tab-spese"><div id="spese-app"></div></div>
+
+<!-- ========== METEO ========== -->
+<div class="tab-content" id="tab-meteo">
+<p class="section-label">Meteo del viaggio</p>
+<div id="meteo-container"><div class="meteo-loading">⏳ Caricamento previsioni...</div></div>
+<p class="meteo-note">Fonte: Open-Meteo · la previsione reale arriva ~16 giorni prima, fino ad allora medie di giugno</p>
+</div>
+
+<!-- ========== INFO ========== -->
+<div class="tab-content" id="tab-info">
+<p class="section-label">Voli · tutti da prenotare</p>
+<div class="volo-card"><div>
+<div class="volo-dir">Andata · Mer 9 Giu (giorno da confermare)</div>
+<div class="volo-route">MXP → FAE</div>
+<div class="volo-details">Atlantic Airways · 15:20 → 17:35 ora locale · A320<br/>Nuovo diretto Malpensa–Vágar, 1 volo a settimana dal 2/6 al 1/9/2027</div>
+</div><div class="volo-num">RC495</div></div>
+<div class="volo-card"><div>
+<div class="volo-dir">Trasferimento · Lun 14 Giu</div>
+<div class="volo-route">FAE → EDI</div>
+<div class="volo-details">Atlantic Airways · ~1h20 · orario e giorni 2027 da verificare<br/>Fær Øer e Scozia hanno la stessa ora</div>
+</div><div class="volo-num">RC</div></div>
+<div class="volo-card"><div>
+<div class="volo-dir">Ritorno · Mer 16 Giu</div>
+<div class="volo-route">EDI → BGY</div>
+<div class="volo-details">Low cost per Bergamo (o Malpensa) · orario da definire<br/>Bagaglio a mano: scarponi e giacca addosso</div>
+</div><div class="volo-num">FR?</div></div>
+
+<p class="section-label" style="margin-top:20px;">Documenti</p>
+<div class="info-card">
+<div class="info-row"><span class="info-key">Fær Øer</span><span class="info-val">Carta d'identità valida per l'espatrio o passaporto</span></div>
+<div class="info-row"><span class="info-key">Regno Unito</span><span class="info-val warn">Passaporto + ETA per ciascuno (£16, si parla di £20) · vale 2 anni</span></div>
+<div class="info-row"><span class="info-key">Dove</span><span class="info-val"><a href="https://www.gov.uk/eta" target="_blank" rel="noopener">gov.uk/eta ↗</a> o app UK ETA</span></div>
+<div class="info-row"><span class="info-key">Sanità</span><span class="info-val">Tessera sanitaria (TEAM) + assicurazione viaggio</span></div>
+</div>
+
+<p class="section-label" style="margin-top:20px;">Dove si dorme</p>
+<div class="info-card">
+<div class="info-card-title">🏠 Appartamento a Tórshavn · da prenotare</div>
+<div class="info-row"><span class="info-key">Notti</span><span class="info-val">5 · 9 → 14 giugno</span></div>
+<div class="info-row"><span class="info-key">Requisito</span><span class="info-val">Cucina, parcheggio, a piedi dal centro e dal porto traghetti</span></div>
+<div class="info-row"><span class="info-key">Perché lì</span><span class="info-val">Bónus vicino, bus rossi gratis, traghetto per Nólsoy, bus 300 per l'aeroporto</span></div>
+<div class="info-row"><span class="info-key">Mappa</span><span class="info-val"><a class="nav-point" data-day="0" data-point="0" data-label="Tórshavn" data-maps="https://www.google.com/maps/search/?api=1&amp;query=T%C3%B3rshavn" href="https://www.google.com/maps/search/?api=1&amp;query=T%C3%B3rshavn" target="_blank" rel="noopener">Tórshavn ↗</a></span></div>
+</div>
+<div class="info-card">
+<div class="info-card-title">🏰 Edimburgo · da prenotare</div>
+<div class="info-row"><span class="info-key">Notti</span><span class="info-val">2 · 14 → 16 giugno</span></div>
+<div class="info-row"><span class="info-key">Zona</span><span class="info-val">Old Town / Leith Walk, sulla linea del tram</span></div>
+<div class="info-row"><span class="info-key">Nota</span><span class="info-val">Tassa di soggiorno 5% sugli alloggi · evitare agosto (Fringe)</span></div>
+</div>
+
+<p class="section-label" style="margin-top:20px;">Come si risparmia</p>
+<div class="info-card">
+<div class="info-row"><span class="info-key">Auto</span><span class="info-val">Solo 3 giorni, utilitaria (no 4x4) · pieno prima di renderla</span></div>
+<div class="info-row"><span class="info-key">Tunnel</span><span class="info-val">Sottomarini ~100 DKK; quello con la rotonda sotto il mare (Eysturoy) è il più caro: si passa dal ponte</span></div>
+<div class="info-row"><span class="info-key">Pedaggi</span><span class="info-val">Li addebita il noleggio a fine giro (targa)</span></div>
+<div class="info-row"><span class="info-key">Cibo</span><span class="info-val">Spesa al Bónus, pranzi al sacco · una sola cena fuori (750–900 DKK in due)</span></div>
+<div class="info-row"><span class="info-key">Trekking</span><span class="info-val">Uno solo a pagamento (Trælanípa) · molti posti sono gratis</span></div>
+<div class="info-row"><span class="info-key">Edimburgo</span><span class="info-val">Musei nazionali gratis · Arthur's Seat e Calton Hill gratis</span></div>
+</div>
+
+<p class="section-label" style="margin-top:20px;">Info pratiche</p>
+<div class="info-card">
+<div class="info-card-title">🕐 Ora, soldi, telefono</div>
+<div class="info-row"><span class="info-key">Fuso</span><span class="info-val">Fær Øer e Scozia: 1 ora indietro rispetto all'Italia</span></div>
+<div class="info-row"><span class="info-key">Valuta Fær Øer</span><span class="info-val">Corona (DKK / corona faroese) · carta quasi ovunque</span></div>
+<div class="info-row"><span class="info-key">Valuta UK</span><span class="info-val">Sterlina (GBP) · contactless ovunque</span></div>
+<div class="info-row"><span class="info-key">Roaming</span><span class="info-val warn">Fær Øer fuori dal roaming UE · UK dipende dall'operatore: controllare l'offerta prima</span></div>
+<div class="info-row"><span class="info-key">Prefissi</span><span class="info-val">+298 Fær Øer · +44 UK</span></div>
+<div class="info-row"><span class="info-key">Spina</span><span class="info-val">Fær Øer come in Italia (C/F) · UK tipo G: adattatore</span></div>
+</div>
+<div class="info-card">
+<div class="info-card-title">🌦 Giugno</div>
+<div class="info-row"><span class="info-key">Fær Øer</span><span class="info-val">7–12 °C · vento e pioggia anche nella stessa ora · nebbia improvvisa</span></div>
+<div class="info-row"><span class="info-key">Luce</span><span class="info-val">Quasi 20 ore · tramonto dopo le 22:30</span></div>
+<div class="info-row"><span class="info-key">Edimburgo</span><span class="info-val">10–18 °C · tramonto ~22:00</span></div>
+<div class="info-row"><span class="info-key">Valigia</span><span class="info-val">Strati, guscio impermeabile, scarponi, cappello</span></div>
+</div>
+<div class="info-card">
+<div class="info-card-title">🥾 Regole dei sentieri</div>
+<div class="info-row"><span class="info-key">Terreni</span><span class="info-val">Molti sentieri sono su terre private: si paga dove richiesto</span></div>
+<div class="info-row"><span class="info-key">Nebbia</span><span class="info-val">Se cala, si torna indietro: le scogliere non hanno parapetti</span></div>
+<div class="info-row"><span class="info-key">Pecore</span><span class="info-val">Hanno sempre la precedenza, anche in strada</span></div>
+<div class="info-row"><span class="info-key">Tariffe</span><span class="info-val"><a href="https://visitfaroeislands.com/en/see-do/activities/hiking/hiking-fees" target="_blank" rel="noopener">Hiking fees ↗</a></span></div>
+</div>
+<div class="info-card">
+<div class="info-card-title">🚨 Emergenze</div>
+<div class="info-row"><span class="info-key">Fær Øer</span><span class="info-val">112</span></div>
+<div class="info-row"><span class="info-key">Regno Unito</span><span class="info-val">999 o 112</span></div>
+</div>
+<div class="quote">Sulle Fær Øer il meteo decide il programma. Le giornate di sole si spendono sulle scogliere, quelle di nebbia nei villaggi.</div>
+</div>
+
+<nav class="bottom-nav">
+<button class="nav-btn active" data-tab="piano"><span class="n-icon">🗺</span>Piano</button>
+<button class="nav-btn" data-tab="idee"><span class="n-icon">💡</span>Idee</button>
+<button class="nav-btn" data-tab="spese"><span class="n-icon">💶</span>Spese</button>
+<button class="nav-btn" data-tab="meteo"><span class="n-icon">🌦</span>Meteo</button>
+<button class="nav-btn" data-tab="info"><span class="n-icon">ℹ️</span>Info</button>
+</nav>
+<button aria-label="Installa l'app" class="install-fab" hidden="" id="install-btn" type="button"><img alt="" id="install-icon"/><b>Installa app</b></button>
+<div class="install-toast" hidden="" id="ios-hint"></div>
+
+<div class="maps-modal hidden" id="maps-modal">
+<div class="maps-modal-box">
+<div class="maps-modal-title">Maps<small id="maps-modal-sub"></small></div>
+<div class="maps-list" id="maps-main-actions">
+<a id="maps-point-btn" href="#" target="_blank" rel="noopener">📍 Apri il punto</a>
+<button id="maps-nav-btn" type="button">🧭 Navigazione da un punto precedente</button>
+</div>
+<div class="maps-list maps-hidden" id="maps-prev-list"></div>
+<button class="maps-close-btn" id="maps-close-btn" type="button">Chiudi</button>
+</div>
+</div>
+
+<script>
+/* =====================================================================
+   DATI DEL VIAGGIO
+   tipo: volo | logistica | noi | libero
+   costo: 'gratis' oppure testo (es. '200 DKK a testa'). book:true = da prenotare. tbc:true = orario da confermare.
+   stima:true = orario indicativo («~»). Per riempire uno slot libero: tipo 'noi' + titolo/desc.
+   ===================================================================== */
+const MAPS = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const DIR = (a, b) => 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(a) + '&destination=' + encodeURIComponent(b);
+const BASE_FO = { nome: 'Appartamento a Tórshavn', q: 'Tórshavn' };
+
+const GIORNI = [
+  { num: 1, data: '2027-06-09', label: 'Mer 9 Giu', giorno: 'Mercoledì 9 Giugno', titolo: 'Volo · cascata di Gásadalur', sotto: 'Si atterra e la prima cartolina è a 15 minuti.', badge: ['volo', 'Arrivo'], zona: 'vagar', lat: 62.06, lon: -7.27,
+    quote: 'Vágar è l\'isola dell\'aeroporto e anche quella della cascata che cade nell\'oceano. Con la luce fino a tardi la si vede subito, poi Tórshavn.',
+    blocchi: [
+      { ora: '11:30', fine: '13:30', tipo: 'logistica', icon: '🚌', titolo: 'Bergamo → Malpensa', desc: 'Navetta, treno o passaggio: da decidere. Al ritorno si atterra a Bergamo, quindi meglio non lasciare l\'auto a Malpensa.', stima: true },
+      { ora: '13:30', fine: '15:20', tipo: 'logistica', icon: '🛂', titolo: 'Controlli e imbarco · MXP T1', desc: 'Le Fær Øer non sono in Schengen pieno: tenere a portata il documento.', stima: true },
+      { ora: '15:20', fine: '17:35', tipo: 'volo', titolo: 'Volo RC495 Malpensa → Vágar', desc: 'Atlantic Airways, A320. 15:20 ora italiana, 17:35 ora locale (3h15 di volo, un\'ora di fuso).', durata: 195, tbc: true },
+      { ora: '17:35', fine: '18:30', tipo: 'logistica', icon: '🚗', titolo: 'Ritiro auto a Vágar', desc: 'Noleggio per 3 giorni, utilitaria. Riconsegna sabato a Tórshavn.', book: true, stima: true,
+        places: [{ label: 'Aeroporto di Vágar', q: 'Vágar Airport' }] },
+      { ora: '18:30', fine: '20:00', tipo: 'noi', icon: '💧', titolo: 'Gásadalur · cascata Múlafossur', desc: 'La cascata che cade dritta nell\'oceano col villaggio sullo sfondo. Dieci minuti a piedi dal parcheggio. La sera c\'è meno gente.', costo: 'gratis', stima: true,
+        places: [{ label: 'Múlafossur', q: 'Múlafossur waterfall Gásadalur' }] },
+      { ora: '20:00', fine: '21:00', tipo: 'logistica', icon: '🚗', titolo: 'Gásadalur → Tórshavn', desc: '~1h. Si passa il tunnel sottomarino di Vágar (pedaggio ~100 DKK, addebitato dal noleggio).', stima: true },
+      { id: 'd1-sera', ora: '21:00', fine: '23:00', tipo: 'libero', icon: '🔑', titolo: 'Check-in e cena veloce', desc: 'Qualcosa portato da casa o un fish & chips. La spesa grossa domattina.' },
+    ],
+    notte: { ...BASE_FO, dove: 'Tórshavn · notte 1 di 5' } },
+
+  { num: 2, data: '2027-06-10', label: 'Gio 10 Giu', giorno: 'Giovedì 10 Giugno', titolo: 'Trælanípa · Bøur · Saksun · Tjørnuvík', sotto: 'Il lago sopra l\'oceano e la costa ovest.', badge: ['trek', 'Trekking'], zona: 'vagar', lat: 62.05, lon: -7.20,
+    quote: 'La giornata più fotografata del viaggio. L\'unico trekking a pagamento è al mattino; il resto è strada panoramica e villaggi, gratis.',
+    blocchi: [
+      { ora: '08:00', fine: '09:00', tipo: 'noi', icon: '🛒', titolo: 'Spesa al Bónus', desc: 'Il supermercato più economico. Colazioni, pranzi al sacco e cene per i 5 giorni.', costo: 'spesa',
+        places: [{ label: 'Bónus Tórshavn', q: 'Bónus Tórshavn' }] },
+      { ora: '09:00', fine: '10:00', tipo: 'logistica', icon: '🚗', titolo: 'Tórshavn → Miðvágur', desc: '~50 min, di nuovo sotto il mare verso Vágar.', stima: true },
+      { ora: '10:00', fine: '13:00', tipo: 'noi', icon: '🥾', titolo: 'Trælanípa · lago Sørvágsvatn', desc: 'Il lago che sembra sospeso sopra l\'oceano, poi la cascata Bøsdalafossur. ~3h andata e ritorno, quasi tutto in piano. Senza guida 200 DKK a testa.', costo: '200 DKK a testa',
+        places: [{ label: 'Trælanípa (partenza)', q: 'Trælanípa trailhead Miðvágur' }] },
+      { id: 'd2-pranzo', ora: '13:00', fine: '14:00', tipo: 'libero', icon: '🥪', titolo: 'Pranzo al sacco', desc: 'In auto o sul prato se non piove.' },
+      { ora: '14:00', fine: '15:00', tipo: 'noi', icon: '🏘', titolo: 'Bøur · vista su Drangarnir', desc: 'Villaggio con tetti d\'erba e la vista sui faraglioni e sull\'isolotto di Tindhólmur. Per vederli da vicino serve il trekking guidato (vedi Idee).', costo: 'gratis',
+        places: [{ label: 'Bøur', q: 'Bøur Faroe Islands' }] },
+      { ora: '15:00', fine: '16:15', tipo: 'logistica', icon: '🚗', titolo: 'Bøur → Saksun', desc: '~1h15, rientro su Streymoy e strada a nord.', stima: true },
+      { ora: '16:15', fine: '17:30', tipo: 'noi', icon: '⛪', titolo: 'Saksun · chiesa e laguna', desc: 'Chiesetta col tetto d\'erba sopra una laguna che si svuota con la marea. Verificare se c\'è un contributo per scendere alla laguna.', costo: 'gratis', stima: true,
+        places: [{ label: 'Saksun', q: 'Saksun church' }] },
+      { ora: '17:30', fine: '18:15', tipo: 'logistica', icon: '🚗', titolo: 'Saksun → Tjørnuvík', desc: '~40 min, fino in fondo alla strada.', stima: true },
+      { ora: '18:15', fine: '19:15', tipo: 'noi', icon: '🌊', titolo: 'Tjørnuvík · spiaggia nera', desc: 'Il villaggio più a nord di Streymoy, con vista sui faraglioni Risin e Kellingin dall\'altra parte del fiordo.', costo: 'gratis', stima: true,
+        places: [{ label: 'Tjørnuvík', q: 'Tjørnuvík beach' }] },
+      { ora: '19:15', fine: '20:15', tipo: 'logistica', icon: '🚗', titolo: 'Rientro a Tórshavn', desc: '~50 min.', stima: true },
+      { id: 'd2-sera', ora: '20:15', fine: '23:00', tipo: 'libero', icon: '🍝', titolo: 'Cena in appartamento', desc: 'Giornata lunga: pasta e piedi sul divano.' },
+    ],
+    notte: { ...BASE_FO, dove: 'Tórshavn · notte 2 di 5' } },
+
+  { num: 3, data: '2027-06-11', label: 'Ven 11 Giu', giorno: 'Venerdì 11 Giugno', titolo: 'Eysturoy · Eiði · Slættaratindur · Gjógv', sotto: 'Il ponte sull\'Atlantico al posto del tunnel caro.', badge: ['isole', 'Isole'], zona: 'eysturoy', lat: 62.30, lon: -6.98,
+    quote: 'Per arrivare su Eysturoy si prende il ponte di Norðskáli: gratis e panoramico. Il tunnel sottomarino con la rotonda è il pedaggio più caro dell\'arcipelago.',
+    blocchi: [
+      { id: 'd3-mat', ora: '08:00', fine: '09:00', tipo: 'libero', icon: '☕', titolo: 'Colazione e zaino', desc: 'Pranzo al sacco pronto prima di uscire.' },
+      { ora: '09:00', fine: '10:00', tipo: 'logistica', icon: '🌉', titolo: 'Tórshavn → ponte sull\'Atlantico → Eiði', desc: '~1h. Il ponte tra Streymoy ed Eysturoy, niente pedaggio.', stima: true,
+        places: [{ label: 'Ponte di Norðskáli', q: 'Brúgvin um Sundini Norðskáli' }] },
+      { ora: '10:00', fine: '10:45', tipo: 'noi', icon: '🪨', titolo: 'Eiði · Risin e Kellingin', desc: 'Il gigante e la strega, i due faraglioni della leggenda, visti dal belvedere sopra il villaggio.', costo: 'gratis', stima: true,
+        places: [{ label: 'Eiði', q: 'Eiði Faroe Islands' }] },
+      { ora: '10:45', fine: '13:15', tipo: 'noi', icon: '⛰', titolo: 'Slættaratindur · 880 m', desc: 'Il punto più alto delle isole. Dal passo di Eiðisskarð ~2h–2h30 andata e ritorno, ripido ma senza difficoltà. Con il cielo limpido si vedono quasi tutte le isole. Con la nebbia si salta.', costo: 'gratis', stima: true,
+        places: [{ label: 'Slættaratindur (partenza)', q: 'Slættaratindur parking Eiðisskarð' }] },
+      { id: 'd3-pranzo', ora: '13:15', fine: '14:15', tipo: 'libero', icon: '🥪', titolo: 'Pranzo al sacco', desc: 'Vista sul fiordo di Funningur.' },
+      { ora: '14:15', fine: '16:15', tipo: 'noi', icon: '🏞', titolo: 'Gjógv · la gola e il villaggio', desc: 'Porto naturale dentro una gola di roccia, case colorate e un sentiero sulla scogliera sopra il paese.', costo: 'gratis', stima: true,
+        places: [{ label: 'Gjógv', q: 'Gjógv gorge' }] },
+      { ora: '16:15', fine: '17:00', tipo: 'noi', icon: '⛪', titolo: 'Funningur · chiesa di legno', desc: 'Una delle chiese di legno più antiche, del 1847, col tetto d\'erba.', costo: 'gratis', stima: true,
+        places: [{ label: 'Funningur', q: 'Funningur church' }] },
+      { ora: '17:00', fine: '18:15', tipo: 'logistica', icon: '🚗', titolo: 'Rientro a Tórshavn dal ponte', desc: '~1h15.', stima: true },
+      { id: 'd3-sera', ora: '18:15', fine: '23:00', tipo: 'libero', icon: '🌅', titolo: 'Sera libera', desc: 'Un giro sul porto di Tórshavn con la luce lunga.' },
+    ],
+    notte: { ...BASE_FO, dove: 'Tórshavn · notte 3 di 5' } },
+
+  { num: 4, data: '2027-06-12', label: 'Sab 12 Giu', giorno: 'Sabato 12 Giugno', titolo: 'Kirkjubøur · Tórshavn a piedi', sotto: 'Si restituisce l\'auto e si rallenta.', badge: ['isole', 'Lenta'], zona: 'torshavn', lat: 62.01, lon: -6.77,
+    quote: 'Kirkjubøur era il centro religioso delle isole nel Medioevo. Nel pomeriggio Tórshavn si gira tutta a piedi, e la sera c\'è l\'unica cena fuori.',
+    blocchi: [
+      { id: 'd4-mat', ora: '08:00', fine: '09:30', tipo: 'libero', icon: '☕', titolo: 'Mattina con calma', desc: 'Colazione lunga.' },
+      { ora: '09:30', fine: '10:00', tipo: 'logistica', icon: '🚗', titolo: 'Tórshavn → Kirkjubøur', desc: '~20 min. In alternativa si va a piedi sul sentiero vecchio (vedi Idee).', stima: true },
+      { ora: '10:00', fine: '12:30', tipo: 'noi', icon: '🏛', titolo: 'Kirkjubøur', desc: 'Le rovine della cattedrale di San Magnus, la chiesa di Sant\'Olav e la fattoria Roykstovan, abitata dalla stessa famiglia da 17 generazioni. Si gira gratis da fuori.', costo: 'gratis', stima: true,
+        places: [{ label: 'Kirkjubøur', q: 'Kirkjubøur' }] },
+      { id: 'd4-pranzo', ora: '12:30', fine: '14:00', tipo: 'libero', icon: '🥪', titolo: 'Pranzo', desc: 'In appartamento, poi si restituisce l\'auto.' },
+      { ora: '14:00', fine: '14:45', tipo: 'logistica', icon: '⛽', titolo: 'Pieno e riconsegna auto', desc: 'A Tórshavn. Da qui in poi si va a piedi, in bus e in traghetto.', stima: true },
+      { ora: '14:45', fine: '17:30', tipo: 'noi', icon: '🏘', titolo: 'Tórshavn a piedi', desc: 'Tinganes, la penisola del governo tra case rosse e tetti d\'erba; il forte di Skansin; il porto. I bus rossi in città sono gratis.', costo: 'gratis',
+        places: [{ label: 'Tinganes', q: 'Tinganes Tórshavn' }, { label: 'Skansin', q: 'Skansin Tórshavn' }] },
+      { id: 'd4-pom', ora: '17:30', fine: '19:30', tipo: 'libero', icon: '🚿', titolo: 'Prima di cena', desc: 'Due ore libere.' },
+      { ora: '19:30', fine: '22:00', tipo: 'noi', icon: '🐟', titolo: 'L\'unica cena fuori', desc: 'Pesce locale in un posto semplice del centro. Una cena per due costa 750–900 DKK: per questo è una sola.', costo: '750–900 DKK in due', book: true },
+    ],
+    notte: { ...BASE_FO, dove: 'Tórshavn · notte 4 di 5' } },
+
+  { num: 5, data: '2027-06-13', label: 'Dom 13 Giu', giorno: 'Domenica 13 Giugno', titolo: 'Nólsoy in traghetto', sotto: 'L\'isola davanti a Tórshavn, a piedi.', badge: ['trek', 'A piedi'], zona: 'torshavn', lat: 62.0, lon: -6.67,
+    quote: 'Venti minuti di traghetto e si è su un\'isola di poche centinaia di abitanti. Chi cammina per conto suo non paga il sentiero.',
+    blocchi: [
+      { id: 'd5-mat', ora: '08:00', fine: '09:30', tipo: 'libero', icon: '☕', titolo: 'Colazione', desc: 'Panini per il pranzo nello zaino.' },
+      { ora: '09:30', fine: '10:00', tipo: 'logistica', icon: '⛴', titolo: 'Traghetto per Nólsoy', desc: '~20 min dal porto di Tórshavn. Verificare gli orari della domenica.', stima: true, tbc: true,
+        places: [{ label: 'Porto traghetti Tórshavn', q: 'Smyril ferry terminal Tórshavn' }] },
+      { ora: '10:00', fine: '15:00', tipo: 'noi', icon: '🥾', titolo: 'Nólsoy · verso il faro di Borðan', desc: 'Si cammina lungo l\'isola fin dove si vuole, con Tórshavn alle spalle. Si torna indietro quando si è stanchi o se arriva la nebbia.', costo: 'gratis', stima: true,
+        places: [{ label: 'Nólsoy', q: 'Nólsoy village' }] },
+      { id: 'd5-pom', ora: '15:00', fine: '17:00', tipo: 'libero', icon: '☕', titolo: 'Pomeriggio sull\'isola', desc: 'Caffè in paese, poi il traghetto del rientro.' },
+      { ora: '17:00', fine: '17:30', tipo: 'logistica', icon: '⛴', titolo: 'Rientro a Tórshavn', desc: '~20 min.', stima: true },
+      { id: 'd5-sera', ora: '17:30', fine: '23:00', tipo: 'libero', icon: '🧳', titolo: 'Ultima sera e valigie', desc: 'Si finisce la spesa del Bónus.' },
+    ],
+    notte: { ...BASE_FO, dove: 'Tórshavn · notte 5 di 5' } },
+
+  { num: 6, data: '2027-06-14', label: 'Lun 14 Giu', giorno: 'Lunedì 14 Giugno', titolo: 'Volo per Edimburgo · Old Town', sotto: 'Dalle pecore ai pub.', badge: ['edi', 'Edimburgo'], zona: 'edi', lat: 55.95, lon: -3.19, edi: true,
+    quote: 'Bus fino all\'aeroporto, un\'ora di volo, tram fino al centro. La sera si sale a Calton Hill per il tramonto.',
+    blocchi: [
+      { id: 'd6-mat', ora: '08:00', fine: '09:30', tipo: 'libero', icon: '🧹', titolo: 'Check-out', desc: 'Appartamento in ordine, chiavi.' },
+      { ora: '09:30', fine: '10:30', tipo: 'logistica', icon: '🚌', titolo: 'Bus 300 Tórshavn → aeroporto', desc: '~50 min. Biglietto a bordo.', stima: true, tbc: true },
+      { ora: '10:30', fine: '12:30', tipo: 'logistica', icon: '🛂', titolo: 'Controlli a Vágar', desc: 'Aeroporto piccolo, si fa in fretta. Per il Regno Unito serve il passaporto con l\'ETA.', stima: true },
+      { ora: '12:30', fine: '13:50', tipo: 'volo', titolo: 'Volo Vágar → Edimburgo', desc: 'Atlantic Airways, ~1h20. Stessa ora locale. Orario da confermare.', durata: 80, tbc: true },
+      { ora: '13:50', fine: '15:30', tipo: 'logistica', icon: '🚋', titolo: 'Tram per il centro e check-in', desc: 'Il tram dall\'aeroporto arriva in centro in ~35 min.', stima: true },
+      { ora: '15:30', fine: '19:00', tipo: 'noi', icon: '🏰', titolo: 'Royal Mile e Old Town', desc: 'Dal castello a Holyrood, Victoria Street, Grassmarket, il cimitero di Greyfriars.', costo: 'gratis',
+        places: [{ label: 'Royal Mile', q: 'Royal Mile Edinburgh' }, { label: 'Victoria Street', q: 'Victoria Street Edinburgh' }] },
+      { id: 'd6-cena', ora: '19:00', fine: '21:15', tipo: 'libero', icon: '🍺', titolo: 'Cena al pub', desc: 'Un pub con cucina: si spende meno che al ristorante.' },
+      { ora: '21:15', fine: '22:30', tipo: 'noi', icon: '🌇', titolo: 'Calton Hill al tramonto', desc: 'Dieci minuti di salita, vista su città, castello e mare. Il sole cala verso le 22.', costo: 'gratis',
+        places: [{ label: 'Calton Hill', q: 'Calton Hill Edinburgh' }] },
+    ],
+    notte: { nome: 'Alloggio a Edimburgo', q: 'Old Town Edinburgh', dove: 'Edimburgo · notte 1 di 2' } },
+
+  { num: 7, data: '2027-06-15', label: 'Mar 15 Giu', giorno: 'Martedì 15 Giugno', titolo: 'Arthur\'s Seat · musei · Dean Village', sotto: 'Una giornata intera spendendo quasi niente.', badge: ['edi', 'Edimburgo'], zona: 'edi', lat: 55.95, lon: -3.19, edi: true,
+    quote: 'Un vulcano spento in mezzo alla città, il museo nazionale gratis e il borgo sul fiume. Il castello resta un\'opzione a pagamento.',
+    blocchi: [
+      { id: 'd7-mat', ora: '08:00', fine: '09:00', tipo: 'libero', icon: '☕', titolo: 'Colazione', desc: 'Scottish breakfast, una volta nella vita.' },
+      { ora: '09:00', fine: '11:30', tipo: 'noi', icon: '⛰', titolo: 'Arthur\'s Seat · 251 m', desc: 'Da Holyrood si sale in ~45 min. Vista sulla città e sul Firth of Forth.', costo: 'gratis',
+        places: [{ label: 'Arthur\'s Seat', q: 'Arthur\'s Seat Edinburgh' }] },
+      { id: 'd7-pranzo', ora: '11:30', fine: '13:00', tipo: 'libero', icon: '🥧', titolo: 'Pranzo', desc: 'Un pie o un panino in Old Town.' },
+      { ora: '13:00', fine: '15:30', tipo: 'noi', icon: '🏛', titolo: 'National Museum of Scotland', desc: 'Dalla pecora Dolly ai pezzi degli scacchi di Lewis. Dalla terrazza sul tetto si vede il castello.', costo: 'gratis',
+        places: [{ label: 'National Museum of Scotland', q: 'National Museum of Scotland' }] },
+      { ora: '15:30', fine: '17:00', tipo: 'noi', icon: '🏡', titolo: 'Dean Village e Water of Leith', desc: 'Il vecchio borgo dei mulini, a 15 minuti a piedi da Princes Street.', costo: 'gratis',
+        places: [{ label: 'Dean Village', q: 'Dean Village Edinburgh' }] },
+      { id: 'd7-pom', ora: '17:00', fine: '19:00', tipo: 'libero', icon: '⬜', titolo: 'Tardo pomeriggio', desc: 'Princes Street Gardens, oppure il castello se lo avete scelto.' },
+      { id: 'd7-sera', ora: '19:00', fine: '23:00', tipo: 'libero', icon: '🥃', titolo: 'Ultima sera', desc: 'Cena e un whisky per chiudere.' },
+    ],
+    notte: { nome: 'Alloggio a Edimburgo', q: 'Old Town Edinburgh', dove: 'Edimburgo · notte 2 di 2' } },
+
+  { num: 8, data: '2027-06-16', label: 'Mer 16 Giu', giorno: 'Mercoledì 16 Giugno', titolo: 'Rientro a Bergamo', sotto: 'Orario del volo da scegliere.', badge: ['volo', 'Partenza'], zona: 'edi', lat: 55.95, lon: -3.36, edi: true,
+    quote: null,
+    blocchi: [
+      { id: 'd8-mat', ora: '08:00', fine: '10:00', tipo: 'libero', icon: '🧳', titolo: 'Check-out', desc: 'Se il volo è nel pomeriggio, mattina libera in città.' },
+      { ora: '10:00', fine: '11:00', tipo: 'logistica', icon: '🚋', titolo: 'Tram per l\'aeroporto', desc: '~35 min.', stima: true,
+        places: [{ label: 'Aeroporto di Edimburgo', q: 'Edinburgh Airport' }] },
+      { ora: '13:00', fine: '16:20', tipo: 'volo', titolo: 'Volo Edimburgo → Bergamo', desc: 'Low cost, ~2h20 + un\'ora di fuso. Compagnia e orario da scegliere quando escono i voli estivi.', durata: 140, tbc: true },
+    ],
+    notte: null },
+];
+
+const TIPI = {
+  volo:      { label: 'Volo',            icon: '✈️' },
+  logistica: { label: 'Logistica',       icon: '🚐' },
+  libero:    { label: 'Slot libero',     icon: '⬜' },
+  noi:       { label: 'Attività',        icon: '🧡' },
+};
+
+/* ===== UTILS ===== */
+function toMin(hhmm) { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; }
+function durata(b) { if (b.durata != null) return b.durata; return Math.max(0, toMin(b.fine) - toMin(b.ora)); }
+function fmtDur(min) { const h = Math.floor(min / 60), m = min % 60; return m ? `${h}h${String(m).padStart(2, '0')}` : `${h}h`; }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function store(key, fallback) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; } }
+function storeSet(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+/* ===== NOTE SLOT ===== */
+const NOTE_KEY = 'faroe27_note_v1';
+function noteSave(id, val) { const n = store(NOTE_KEY, {}); val.trim() ? n[id] = val : delete n[id]; storeSet(NOTE_KEY, n); }
+
+/* ===== TAB ===== */
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.toggle('active', el.id === 'tab-' + name));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.toggle('active', el.dataset.tab === name));
+  window.scrollTo(0, 0);
+  if (name === 'meteo' && !window.meteoLoaded) loadMeteo();
+  if (name === 'spese') spRender();
+  if (name === 'idee') ideeRender();
+}
+document.querySelectorAll('.nav-btn').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+/* ===== PIANO ===== */
+function navAttrs(day, idx, label, q) {
+  return `class="place-link nav-point" data-day="${day}" data-point="${idx}" data-label="${esc(label)}" data-nav="${esc(q)}" data-maps="${esc(MAPS(q))}" href="${esc(MAPS(q))}" target="_blank" rel="noopener"`;
+}
+function placeLinks(b, dayNum, counter) {
+  if (!b.places || !b.places.length) return '';
+  return ' ' + b.places.map(p => `<a ${navAttrs(dayNum, counter.n++, p.label, p.q)}>📍 ${esc(p.label)}</a>`).join(' · ');
+}
+function pianoRender() {
+  const notes = store(NOTE_KEY, {});
+  let html = '';
+  GIORNI.forEach(g => {
+    const counter = { n: 0 };
+    const free = g.blocchi.filter(b => b.tipo === 'noi' && b.costo === 'gratis').length;
+    const paid = g.blocchi.filter(b => b.tipo === 'noi' && b.costo && b.costo !== 'gratis' && b.costo !== 'spesa').length;
+    html += `<div class="giorno-card${g.edi ? ' edi' : ''}" id="giorno-${g.num}">
+      <div class="giorno-header" role="button" tabindex="0" data-toggle="${g.num}">
+        <div class="giorno-num">${g.num}</div>
+        <div class="giorno-meta">
+          <div class="giorno-data">${g.giorno}</div>
+          <div class="giorno-title">${esc(g.titolo)}</div>
+          <div class="giorno-sotto">${esc(g.sotto)}</div>
+          ${free || paid ? `<div class="giorno-costo">🟢 ${free} tappe gratis${paid ? ` · 🟠 ${paid} a pagamento` : ''}</div>` : ''}
+        </div>
+        <span class="giorno-badge badge-${g.badge[0]}">${g.badge[1]}</span>
+      </div>
+      <div class="giorno-body">`;
+    if (g.quote) html += `<div class="giorno-quote">${esc(g.quote)}</div>`;
+    g.blocchi.forEach(b => {
+      const t = TIPI[b.tipo], d = durata(b);
+      let tags = '';
+      if (b.costo === 'gratis') tags += `<span class="tag free">Gratis</span>`;
+      else if (b.costo && b.costo !== 'spesa') tags += `<span class="tag cost">${esc(b.costo)}</span>`;
+      if (b.book) tags += `<span class="tag book">Da prenotare</span>`;
+      if (b.tbc) tags += `<span class="tag tbc">Orario da confermare</span>`;
+      if (b.tipo === 'libero') tags += `<span class="tag dur">${fmtDur(d)} liberi</span>`;
+      else if (b.tipo === 'noi' && d) tags += `<span class="tag">${fmtDur(d)}</span>`;
+      let noteHtml = '';
+      if (b.tipo === 'libero' && b.id) {
+        noteHtml = `<div class="lib-note">
+          <textarea id="note-${b.id}" placeholder="La vostra idea per questo slot…" data-note="${b.id}">${esc(notes[b.id] || '')}</textarea>
+          <div class="lib-note-hint">Salvato sul telefono · per inserirlo nel programma passalo ad Andrea/Claude</div></div>`;
+        const ideas = IDEE.filter(i => i.fit.some(f => f.slot === b.id));
+        if (ideas.length) noteHtml += `<div class="slot-ideas">💡 Ci starebbe: ${ideas.map(i => `<a data-idea="${i.id}">${i.icon} ${esc(i.nome.split(' · ')[0])}</a>`).join(' · ')}</div>`;
+      }
+      html += `<div class="blocco t-${b.tipo}">
+        <div class="bl-ora">${b.stima ? '<span class="stima">~</span>' : ''}${b.ora}<small>→ ${b.fine}</small></div>
+        <div class="bl-main">
+          <div class="bl-titolo">${b.icon || t.icon} ${esc(b.titolo)}</div>
+          ${b.desc ? `<div class="bl-desc">${esc(b.desc)}${placeLinks(b, g.num, counter)}</div>` : ''}
+          ${tags ? `<div class="bl-tags">${tags}</div>` : ''}
+          ${noteHtml}
+        </div></div>`;
+    });
+    if (g.notte) html += `<div class="pernottamento">🛏 <div><strong><a ${navAttrs(g.num, counter.n++, g.notte.nome, g.notte.q)}>${esc(g.notte.nome)}</a></strong>${esc(g.notte.dove)}</div></div>`;
+    html += `</div></div>`;
+  });
+  const app = document.getElementById('piano-app');
+  app.innerHTML = html;
+  app.querySelectorAll('[data-toggle]').forEach(h => {
+    const go = () => toggleDay(h.parentElement);
+    h.addEventListener('click', go);
+    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+  app.querySelectorAll('[data-note]').forEach(t => t.addEventListener('input', () => noteSave(t.dataset.note, t.value)));
+  app.querySelectorAll('[data-idea]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToIdea(a.dataset.idea); }));
+  bindNavPoints();
+}
+function toggleDay(card) {
+  const body = card.querySelector('.giorno-body'), isOpen = body.classList.contains('open');
+  document.querySelectorAll('.giorno-body.open').forEach(b => b.classList.remove('open'));
+  if (!isOpen) body.classList.add('open');
+}
+function goToDay(n) {
+  showTab('piano');
+  const card = document.getElementById('giorno-' + n);
+  if (!card) return;
+  document.querySelectorAll('.giorno-body.open').forEach(b => b.classList.remove('open'));
+  card.querySelector('.giorno-body').classList.add('open');
+  setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+/* ===== IDEE =====
+   fit: dove ci sta. tipo 'ok' | 'stretto' | 'variante' (cambia un pezzo del piano). */
+const IDEE_CAT = { puffin: '🐧 Puffin & uccelli', trek: '🥾 Trekking', gratis: '🟢 Gratis', edi: '🏰 Edimburgo' };
+const IDEE = [
+  { id: 'mykines', cat: 'puffin', icon: '🐧', nome: 'Mykines · i puffin', zona: 'Vágar → traghetto da Sørvágur',
+    desc: 'L\'isola dei puffin: a giugno ce ne sono migliaia. Guida obbligatoria (400 DKK a testa se prenotata online prima di partire, 500 sul posto) più il traghetto. Si prenota presto e col mare grosso il traghetto salta: è la più cara e la più bella.',
+    facts: ['giornata intera', '~1.100 DKK in due + traghetto', 'Prenotare'], book: true, q: 'Mykines',
+    fit: [ { tipo: 'variante', g: 2, slot: null, ora: '08:00', fine: '19:00', txt: 'Al posto della giornata ovest: Trælanípa e Bøur si spostano a sabato mattina con l\'auto (Kirkjubøur salta).' } ] },
+  { id: 'kallur', cat: 'trek', icon: '🗼', nome: 'Faro di Kallur · Kalsoy', zona: 'Klaksvík → traghetto per Kalsoy',
+    desc: 'Il faro sulla cresta che sembra il bordo del mondo. 200 DKK a testa per il sentiero, più traghetto con auto da Klaksvík e due tunnel sottomarini. Traghetto con pochi posti auto: arrivare presto.',
+    facts: ['~1h30 a piedi', '400 DKK in due + traghetto + tunnel'], q: 'Kallur lighthouse Kalsoy',
+    fit: [ { tipo: 'variante', g: 3, slot: null, ora: '08:00', fine: '18:00', txt: 'Al posto di Slættaratindur: si parte alle 7:30 per Klaksvík, Kallur in mattinata, Gjógv nel pomeriggio.' } ] },
+  { id: 'villingardalsfjall', cat: 'trek', icon: '⛰', nome: 'Villingardalsfjall · Viðoy', zona: 'Viðareiði, isole del nord',
+    desc: 'La salita sopra Viðareiði, il villaggio più a nord. 200 DKK a testa, nella cassetta al cancello. Ripida, per giornate limpide.',
+    facts: ['~3h', '400 DKK in due'], q: 'Villingardalsfjall Viðareiði',
+    fit: [ { tipo: 'variante', g: 3, slot: null, ora: '09:00', fine: '15:00', txt: 'Al posto di Slættaratindur, con un tunnel sottomarino in più.' } ] },
+  { id: 'drangarnir', cat: 'trek', icon: '🪨', nome: 'Drangarnir da vicino', zona: 'Sørvágur · Vágar',
+    desc: 'I faraglioni con l\'arco, visti dal sentiero sulla costa. Solo con guida, 600 DKK a testa, dal 1° aprile al 1° ottobre. Dal villaggio di Bøur si vedono già bene gratis.',
+    facts: ['~5h', '1.200 DKK in due', 'Prenotare'], book: true, q: 'Drangarnir',
+    fit: [ { tipo: 'variante', g: 2, slot: null, ora: '09:00', fine: '15:00', txt: 'Al posto di Trælanípa e Bøur, se il budget lo permette.' } ] },
+  { id: 'sentiero-kirkjubour', cat: 'gratis', icon: '🚶', nome: 'A piedi da Tórshavn a Kirkjubøur', zona: 'Sentiero vecchio sulla collina',
+    desc: 'Il sentiero che usavano per andare in chiesa, ~7 km, circa 2h a tratta. Si risparmia un giorno di auto: noleggio a 2 giorni invece di 3.',
+    facts: ['~2h a tratta', 'gratis'], q: 'Kirkjubøur',
+    fit: [ { tipo: 'variante', g: 4, slot: 'd4-mat', ora: '08:30', fine: '13:30', txt: 'Andata a piedi, ritorno a piedi o col bus. L\'auto si restituisce venerdì sera.' } ] },
+  { id: 'nolsoy-uccelli', cat: 'puffin', icon: '🌙', nome: 'Uccelli delle tempeste a Nólsoy', zona: 'Nólsoy · di notte',
+    desc: 'Nólsoy ha una delle colonie più grandi di uccelli delle tempeste. Escono solo col buio, che a giugno dura pochissimo: escursione notturna guidata, da cercare all\'ufficio turistico.',
+    facts: ['sera tardi', 'a pagamento'], q: 'Nólsoy',
+    fit: [ { tipo: 'stretto', g: 5, slot: 'd5-sera', ora: '23:00', fine: '01:00', txt: 'Solo se c\'è un traghetto di rientro notturno o un posto per dormire sull\'isola.' } ] },
+  { id: 'castello', cat: 'edi', icon: '🏰', nome: 'Castello di Edimburgo', zona: 'In cima al Royal Mile',
+    desc: 'Corona di Scozia, Pietra del Destino e cannone delle 13:00. A pagamento, biglietto a orario: online costa meno e salta la coda.',
+    facts: ['~2h', 'a pagamento', 'Prenotare'], book: true, q: 'Edinburgh Castle',
+    fit: [ { tipo: 'ok', g: 7, slot: 'd7-pom', ora: '17:00', fine: '18:30', txt: 'Ultimo ingresso nel tardo pomeriggio: controllare l\'orario estivo.' },
+           { tipo: 'stretto', g: 6, slot: null, ora: '15:30', fine: '17:30', txt: 'All\'inizio del Royal Mile, appena arrivati.' } ] },
+  { id: 'portobello', cat: 'edi', icon: '🏖', nome: 'Portobello · la spiaggia di Edimburgo', zona: '20 min di bus dal centro',
+    desc: 'Lungomare vittoriano con sabbia e caffè. Nei giorni di sole è dove vanno gli abitanti.',
+    facts: ['~2h', 'gratis'], q: 'Portobello Beach Edinburgh',
+    fit: [ { tipo: 'ok', g: 8, slot: 'd8-mat', ora: '08:00', fine: '10:00', txt: 'Solo con un volo di rientro nel pomeriggio.' } ] },
+  { id: 'galleria', cat: 'edi', icon: '🖼', nome: 'Scottish National Gallery', zona: 'The Mound · Princes Street',
+    desc: 'Pittura europea e scozzese, dentro i giardini sotto il castello. Ingresso libero.',
+    facts: ['~1h30', 'gratis'], q: 'Scottish National Gallery',
+    fit: [ { tipo: 'ok', g: 7, slot: 'd7-pom', ora: '17:00', fine: '18:30', txt: 'Al posto del castello, se piove.' } ] },
+];
+const IDEE_KEY = 'faroe27_idee_v1';
+let ideeFiltro = 'tutte';
+function ideeRender() {
+  const stars = store(IDEE_KEY, {});
+  const giorno = n => GIORNI.find(g => g.num === n);
+  const FIT_LABEL = { ok: 'ci sta', stretto: 'ci sta, tirato', variante: 'cambia il piano' };
+  const chips = [['tutte', 'Tutte'], ['star', '⭐ Scelte'], ...Object.entries(IDEE_CAT)];
+  const list = IDEE.filter(i => ideeFiltro === 'tutte' || (ideeFiltro === 'star' ? stars[i.id] : i.cat === ideeFiltro));
+  let html = `<p class="section-label">Tappe extra</p>
+  <div class="info-note" style="margin-bottom:14px;">Fuori dal piano base, ognuna con <strong>costo e dove ci sta</strong>. Segna con ⭐ quelle che vi tentano e dimmele: le inserisco nel Piano e aggiorno le Spese.</div>
+  <div class="idea-filters">${chips.map(([k, l]) => `<button class="idea-chip ${ideeFiltro === k ? 'on' : ''}" data-filter="${k}">${l}</button>`).join('')}</div>`;
+  if (!list.length) html += `<div class="info-note">Nessuna tappa qui${ideeFiltro === 'star' ? ': tocca ⭐ su una tappa per sceglierla' : ''}.</div>`;
+  list.forEach(i => {
+    html += `<div class="idea-card ${stars[i.id] ? 'star' : ''}" id="idea-${i.id}">
+      <div class="idea-head"><div class="idea-icon">${i.icon}</div>
+        <div class="idea-titles"><div class="idea-nome">${esc(i.nome)}</div><div class="idea-zona">${esc(i.zona)}</div></div>
+        <button class="idea-star" aria-label="Scegli" data-star="${i.id}">⭐</button></div>
+      <div class="idea-desc">${esc(i.desc)} <a class="place-link" href="${esc(MAPS(i.q))}" target="_blank" rel="noopener">📍 Maps</a></div>
+      <div class="idea-facts">${i.facts.map(f => `<span class="tag ${f === 'Prenotare' ? 'book' : f === 'gratis' ? 'free' : /DKK|pagamento/.test(f) ? 'cost' : 'dur'}">${esc(f)}</span>`).join('')}</div>
+      <div class="idea-fit">${i.fit.map(f => `<div class="fit ${f.tipo}" data-day="${f.g}"><b>${giorno(f.g).label} · ${f.ora}–${f.fine}</b><span><em style="font-style:normal;font-weight:800;">${FIT_LABEL[f.tipo]}</em> · ${esc(f.txt)}</span></div>`).join('')}</div>
+    </div>`;
+  });
+  const app = document.getElementById('idee-app');
+  app.innerHTML = html;
+  app.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => { ideeFiltro = b.dataset.filter; ideeRender(); }));
+  app.querySelectorAll('[data-star]').forEach(b => b.addEventListener('click', () => { const s = store(IDEE_KEY, {}); s[b.dataset.star] ? delete s[b.dataset.star] : s[b.dataset.star] = true; storeSet(IDEE_KEY, s); ideeRender(); }));
+  app.querySelectorAll('.fit[data-day]').forEach(f => f.addEventListener('click', () => goToDay(+f.dataset.day)));
+}
+function goToIdea(id) {
+  ideeFiltro = 'tutte'; showTab('idee');
+  const el = document.getElementById('idea-' + id);
+  if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+/* ===== SPESE =====
+   eur = stima di partenza per 2 persone (mostrata con «~»). Toccando l'importo si scrive quello vero. */
+const DKK_EUR = 0.134, GBP_EUR = 1.17;   // cambi indicativi
+const BUDGET_DEFAULT = 3000;
+const BASE_SPESE = [
+  { id: 'v1', cat: 'voli',    name: 'Malpensa → Vágar (2 adulti)',      note: 'Atlantic Airways RC495 · 9 Giu',         eur: 420 },
+  { id: 'v2', cat: 'voli',    name: 'Vágar → Edimburgo (2 adulti)',     note: 'Atlantic Airways · 14 Giu',              eur: 320 },
+  { id: 'v3', cat: 'voli',    name: 'Edimburgo → Bergamo (2 adulti)',   note: 'Low cost · 16 Giu · bagaglio a mano',    eur: 220 },
+  { id: 'v4', cat: 'voli',    name: 'ETA Regno Unito (2)',              note: '£16 a testa, forse £20',                 eur: 40 },
+  { id: 'a1', cat: 'alloggi', name: 'Appartamento a Tórshavn',          note: '5 notti · con cucina · ~900 DKK/notte',  eur: 620 },
+  { id: 'a2', cat: 'alloggi', name: 'Alloggio a Edimburgo',             note: '2 notti · + tassa di soggiorno 5%',      eur: 330 },
+  { id: 't1', cat: 'trasp',   name: 'Noleggio auto 3 giorni',           note: 'Utilitaria · Vágar → Tórshavn',          eur: 190 },
+  { id: 't2', cat: 'trasp',   name: 'Benzina + tunnel',                 note: '~3 passaggi sotto il mare',               eur: 90 },
+  { id: 't3', cat: 'trasp',   name: 'Traghetto Nólsoy + bus 300',       note: 'Andata e ritorno · 2 persone',            eur: 40 },
+  { id: 't4', cat: 'trasp',   name: 'Tram aeroporto Edimburgo',         note: 'Andata e ritorno · 2 persone',            eur: 40 },
+  { id: 't5', cat: 'trasp',   name: 'Bergamo → Malpensa',               note: 'Navetta o treno · 2 persone',             eur: 40 },
+  { id: 'x1', cat: 'attiv',   name: 'Trælanípa senza guida',            note: '200 DKK × 2',                             eur: 54 },
+  { id: 'c1', cat: 'cibo',    name: 'Spesa al Bónus',                   note: 'Colazioni, pranzi al sacco, 4 cene',      eur: 260 },
+  { id: 'c2', cat: 'cibo',    name: 'L\'unica cena fuori',              note: 'Tórshavn · 750–900 DKK in due',           eur: 115 },
+  { id: 'c3', cat: 'cibo',    name: 'Mangiare a Edimburgo',             note: '2 giorni · pub e caffè',                  eur: 180 },
+  { id: 'z1', cat: 'varie',   name: 'Assicurazione viaggio',            note: 'Annullamento + sanitaria',                eur: 70 },
+];
+const CATS = [
+  { id: 'voli', label: '✈️ Voli e documenti' }, { id: 'alloggi', label: '🏠 Alloggi' }, { id: 'trasp', label: '🚗 Trasporti' },
+  { id: 'attiv', label: '🥾 Attività' }, { id: 'cibo', label: '🍽 Cibo' }, { id: 'varie', label: '🧾 Varie' },
+];
+const SP_KEY = 'faroe27_spese_v1';
+let spEditing = null, spFormErr = '';
+function spLoad() { const s = store(SP_KEY, null) || {}; return { paid: s.paid || {}, custom: s.custom || [], amt: s.amt || {}, budget: s.budget || BUDGET_DEFAULT }; }
+function spFmtE(v) { return Math.round(v).toLocaleString('it') + ' €'; }
+function spRender() {
+  const s = spLoad();
+  const all = [
+    ...BASE_SPESE.map(b => { const real = s.amt[b.id] != null; return { ...b, eur: real ? s.amt[b.id] : b.eur, stima: !real, paid: !!s.paid[b.id], isCustom: false }; }),
+    ...s.custom.map(c => ({ ...c, stima: false, paid: !!s.paid[c.id], isCustom: true })),
+  ];
+  const sum = arr => arr.reduce((t, i) => t + (i.eur || 0), 0);
+  const tot = sum(all), paid = sum(all.filter(i => i.paid)), stimato = sum(all.filter(i => i.stima));
+  const pct = Math.min(100, tot / s.budget * 100), over = tot > s.budget;
+  let html = `
+  <div class="sp-hero">
+    <div class="sp-hero-label">Totale previsto · 2 persone</div>
+    <div class="sp-hero-val">${spFmtE(tot)}</div>
+    <div class="sp-hero-sub">${over ? `${spFmtE(tot - s.budget)} oltre il budget` : `${spFmtE(s.budget - tot)} di margine sul budget`} · di cui ${spFmtE(stimato)} ancora stimati (~)</div>
+    <div class="sp-meter ${over ? 'over' : ''}"><i style="width:${pct.toFixed(1)}%"></i></div>
+    <div class="sp-meter-legend"><span>0 €</span><span>budget ${spFmtE(s.budget)}</span></div>
+    <div class="sp-budget-row"><label for="sp-budget">Budget</label><input class="sp-input" id="sp-budget" type="number" min="0" step="50" value="${s.budget}"/> €</div>
+    <div class="sp-mini-grid">
+      <div class="sp-mini"><div class="sp-mini-label">Pagato ✓</div><div class="sp-mini-val paid">${spFmtE(paid)}</div></div>
+      <div class="sp-mini"><div class="sp-mini-label">Da pagare</div><div class="sp-mini-val due">${spFmtE(tot - paid)}</div></div>
+    </div>
+  </div>
+  <div class="conv">
+    <div class="conv-title">💱 Convertitore veloce</div>
+    <div class="conv-row">
+      <input class="sp-input" id="conv-in" type="number" min="0" step="1" value="200" style="max-width:110px;" aria-label="Importo"/>
+      <select class="sp-input" id="conv-cur" style="max-width:90px;" aria-label="Valuta"><option value="dkk">DKK</option><option value="gbp">GBP</option></select>
+      <span>=</span><span class="conv-out" id="conv-out"></span>
+    </div>
+    <div class="sp-rate-note" style="text-align:left;">Cambi indicativi: 1 DKK ≈ ${DKK_EUR.toFixed(3)} € · 1 £ ≈ ${GBP_EUR.toFixed(2)} €</div>
+  </div>`;
+  CATS.forEach(cat => {
+    const items = all.filter(i => i.cat === cat.id);
+    html += `<div class="sp-cat">
+      <div class="sp-cat-title"><span>${cat.label}</span><button class="sp-add-btn" data-open="${cat.id}">+ Aggiungi</button></div>
+      <div class="sp-form" id="form-${cat.id}">
+        <div class="sp-form-row"><input class="sp-input" id="fi-name-${cat.id}" placeholder="Nome voce"/></div>
+        <div class="sp-form-row"><input class="sp-input" id="fi-note-${cat.id}" placeholder="Nota (opzionale)"/></div>
+        <div class="sp-form-row"><input class="sp-input" id="fi-amt-${cat.id}" type="number" min="0" step="0.01" placeholder="Importo €" style="max-width:130px;"/>
+          <button class="sp-save-btn" data-save="${cat.id}">✓ Salva</button><button class="sp-cancel-btn" data-close="${cat.id}">Annulla</button></div>
+        <div class="sp-err" id="err-${cat.id}"></div>
+      </div>`;
+    if (!items.length) html += `<div class="sp-item"><div class="sp-item-info"><div class="sp-item-note">Nessuna voce</div></div></div>`;
+    items.forEach(item => {
+      const amt = spEditing === item.id
+        ? `<input class="sp-input sp-amt-input" id="amt-edit" type="number" min="0" step="1" value="${item.eur ?? ''}" aria-label="Importo in euro"/>`
+        : `<button class="sp-amt ${item.stima ? 'stima' : ''} ${item.paid ? 'paid-amount' : ''}" data-edit="${item.id}" title="Tocca per scrivere l'importo vero">${spFmtE(item.eur || 0)}</button>`;
+      html += `<div class="sp-item ${item.paid ? 'is-paid' : ''}">
+        <label class="sp-toggle" title="${item.paid ? 'Pagato' : 'Da pagare'}"><input type="checkbox" id="paid-${item.id}" ${item.paid ? 'checked' : ''} data-paid="${item.id}"/><span class="sp-toggle-slider"></span></label>
+        <div class="sp-item-info"><div class="sp-item-name ${item.paid ? 'paid-name' : ''}">${esc(item.name)}</div>${item.note ? `<div class="sp-item-note">${esc(item.note)}</div>` : ''}</div>
+        ${amt}
+        ${item.isCustom ? `<button class="sp-del-btn" data-del="${item.id}" aria-label="Elimina">✕</button>` : ''}
+      </div>`;
+    });
+    html += `<div class="sp-cat-total"><span>Totale ${cat.label.replace(/^\S+\s/, '')}</span><strong>${spFmtE(sum(items))}</strong></div></div>`;
+  });
+  html += `<p class="sp-rate-note">«~» = stima di partenza. Tocca un importo per scrivere quello vero (vuoto = torna alla stima).<br/>Importi e spunte restano salvati sul telefono.</p>`;
+  const app = document.getElementById('spese-app');
+  app.innerHTML = html;
+
+  const convUpd = () => { const v = parseFloat(document.getElementById('conv-in').value) || 0; const r = document.getElementById('conv-cur').value === 'dkk' ? DKK_EUR : GBP_EUR; document.getElementById('conv-out').textContent = (v * r).toLocaleString('it', { maximumFractionDigits: 2 }) + ' €'; };
+  document.getElementById('conv-in').addEventListener('input', convUpd);
+  document.getElementById('conv-cur').addEventListener('change', convUpd);
+  convUpd();
+  document.getElementById('sp-budget').addEventListener('change', e => { const st = spLoad(); const v = parseFloat(e.target.value); st.budget = v > 0 ? v : BUDGET_DEFAULT; storeSet(SP_KEY, st); spRender(); });
+  app.querySelectorAll('[data-paid]').forEach(c => c.addEventListener('change', () => { const st = spLoad(); c.checked ? st.paid[c.dataset.paid] = true : delete st.paid[c.dataset.paid]; storeSet(SP_KEY, st); spRender(); }));
+  app.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.sp-form').forEach(f => f.classList.remove('open')); document.getElementById('form-' + b.dataset.open).classList.add('open'); }));
+  app.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => document.getElementById('form-' + b.dataset.close).classList.remove('open')));
+  app.querySelectorAll('[data-save]').forEach(b => b.addEventListener('click', () => {
+    const cat = b.dataset.save;
+    const name = document.getElementById('fi-name-' + cat).value.trim(), note = document.getElementById('fi-note-' + cat).value.trim();
+    const amount = parseFloat(document.getElementById('fi-amt-' + cat).value);
+    if (!name || isNaN(amount) || amount < 0) { document.getElementById('err-' + cat).textContent = 'Serve un nome e un importo (anche 0).'; return; }
+    const st = spLoad(); st.custom.push({ id: 'c' + Date.now(), cat, name, note, eur: amount }); storeSet(SP_KEY, st); spRender();
+  }));
+  app.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { const st = spLoad(); st.custom = st.custom.filter(c => c.id !== b.dataset.del); delete st.paid[b.dataset.del]; storeSet(SP_KEY, st); spRender(); }));
+  app.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => { spEditing = b.dataset.edit; spRender(); const i = document.getElementById('amt-edit'); if (i) { i.focus(); i.select(); } }));
+  const edit = document.getElementById('amt-edit');
+  if (edit) {
+    let done = false;
+    const commit = () => {
+      if (done) return; done = true;
+      const st = spLoad(), id = spEditing, n = parseFloat(String(edit.value).replace(',', '.'));
+      const custom = st.custom.find(c => c.id === id);
+      if (custom) custom.eur = isNaN(n) ? 0 : n; else isNaN(n) ? delete st.amt[id] : st.amt[id] = n;
+      storeSet(SP_KEY, st); spEditing = null; spRender();
+    };
+    edit.addEventListener('blur', commit);
+    edit.addEventListener('keydown', e => { if (e.key === 'Enter') commit(); if (e.key === 'Escape') { done = true; spEditing = null; spRender(); } });
+  }
+}
+
+/* ===== METEO ===== */
+const WMO_DESC = {
+  0: ['☀️', 'Sole'], 1: ['🌤', 'Per lo più sereno'], 2: ['⛅', 'Parzialmente nuvoloso'], 3: ['☁️', 'Coperto'],
+  45: ['🌫', 'Nebbia'], 48: ['🌫', 'Nebbia'], 51: ['🌦', 'Pioggerella leggera'], 53: ['🌦', 'Pioggerella'], 55: ['🌧', 'Pioggerella intensa'],
+  61: ['🌧', 'Pioggia leggera'], 63: ['🌧', 'Pioggia'], 65: ['🌧', 'Pioggia forte'], 80: ['🌦', 'Rovesci leggeri'], 81: ['🌧', 'Rovesci'], 82: ['⛈', 'Rovesci forti'], 95: ['⛈', 'Temporale'],
+};
+const CLIMA_GIU = {
+  vagar:    { tmin: 7, tmax: 11, wind: 28, rain: '2.5', icon: '🌦', desc: 'Nuvole, schiarite e rovesci veloci' },
+  eysturoy: { tmin: 7, tmax: 11, wind: 26, rain: '2.5', icon: '🌥', desc: 'Variabile, nebbia possibile in quota' },
+  torshavn: { tmin: 8, tmax: 12, wind: 24, rain: '2.0', icon: '🌥', desc: 'Grigio luminoso, qualche pioggia' },
+  edi:      { tmin: 10, tmax: 18, wind: 18, rain: '1.8', icon: '⛅', desc: 'Mite, sole e nuvole' },
+};
+const ZONA_LABEL = { vagar: 'Vágar · Streymoy', eysturoy: 'Eysturoy', torshavn: 'Tórshavn', edi: 'Edimburgo' };
+function fetchWithTimeout(url, ms = 9000) { const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); return fetch(url, { signal: c.signal }).finally(() => clearTimeout(t)); }
+async function loadMeteo() {
+  const box = document.getElementById('meteo-container');
+  const first = new Date(GIORNI[0].data + 'T00:00:00'), days = (first - Date.now()) / 86400000;
+  if (days <= 15) {
+    try {
+      const res = await fetchWithTimeout('https://api.open-meteo.com/v1/forecast?latitude=' + GIORNI.map(g => g.lat).join(',') + '&longitude=' + GIORNI.map(g => g.lon).join(',') +
+        '&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max&timezone=auto&start_date=' + GIORNI[0].data + '&end_date=' + GIORNI[GIORNI.length - 1].data);
+      const data = await res.json(); const locs = Array.isArray(data) ? data : [data];
+      if (locs[0]?.daily?.time?.length) {
+        box.innerHTML = GIORNI.map((g, i) => {
+          const d = (locs[i] || locs[0]).daily, di = Math.max(0, d.time.indexOf(g.data)), z = CLIMA_GIU[g.zona];
+          const w = WMO_DESC[d.weathercode?.[di]] || [z.icon, z.desc];
+          return meteoCard(g, w[0], w[1], Math.round(d.temperature_2m_min[di]), Math.round(d.temperature_2m_max[di]), Math.round(d.windspeed_10m_max[di]), (d.precipitation_sum[di] ?? 0).toFixed(1), 'Open-Meteo');
+        }).join('') + '<p class="meteo-note">✅ Previsioni reali, aggiornate il ' + new Date().toLocaleString('it-IT') + '</p>';
+        window.meteoLoaded = true; return;
+      }
+    } catch (e) { /* medie sotto */ }
+  }
+  box.innerHTML = GIORNI.map(g => { const c = CLIMA_GIU[g.zona]; return meteoCard(g, c.icon, c.desc, c.tmin, c.tmax, c.wind, c.rain, 'media giugno'); }).join('') +
+    `<p class="meteo-note">📊 Medie di giugno${days > 15 ? ` · la previsione vera compare tra ~${Math.ceil(days - 15)} giorni` : ''}</p>`;
+  window.meteoLoaded = true;
+}
+function meteoCard(g, icon, desc, tmin, tmax, wind, rain, fonte) {
+  return `<div class="meteo-day-card"><div class="meteo-day-num">D${g.num}</div>
+    <div class="meteo-day-info"><div class="meteo-day-data">${g.label} · ${ZONA_LABEL[g.zona]}</div><div class="meteo-day-desc">${desc}</div>
+    <div class="meteo-day-temps">${tmin}°–${tmax}°C · 💨 ${wind} km/h · 🌧 ${rain} mm · <em>${fonte}</em></div></div>
+    <div class="meteo-icon">${icon}</div></div>`;
+}
+
+/* ===== COUNTDOWN ===== */
+(function () {
+  const target = new Date('2027-06-09T17:35:00+01:00').getTime(), el = document.getElementById('countdown');
+  function tick() { const d = target - Date.now(); if (d <= 0) { el.textContent = 'Siete sulle isole ✦'; return; } el.textContent = `${Math.floor(d / 86400000)} giorni`; }
+  tick(); setInterval(tick, 60000);
+})();
+
+/* ===== MAPS MODAL ===== */
+const navPoints = [];
+let currentTarget = null;
+const mapsModal = document.getElementById('maps-modal'), prevList = document.getElementById('maps-prev-list');
+function bindNavPoints() {
+  navPoints.length = 0;
+  document.querySelectorAll('.nav-point').forEach(el => {
+    navPoints.push({ day: +el.dataset.day, point: +el.dataset.point, label: el.dataset.label, nav: el.dataset.nav || el.dataset.label, maps: el.dataset.maps });
+    if (el._bound) return; el._bound = true;
+    el.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); openMapsModal(el); });
+  });
+}
+function openMapsModal(el) {
+  currentTarget = { day: +el.dataset.day, point: +el.dataset.point, label: el.dataset.label, nav: el.dataset.nav || el.dataset.label, maps: el.dataset.maps };
+  document.getElementById('maps-modal-sub').textContent = currentTarget.label;
+  document.getElementById('maps-point-btn').href = currentTarget.maps;
+  prevList.innerHTML = ''; prevList.classList.add('maps-hidden');
+  document.getElementById('maps-main-actions').classList.remove('maps-hidden');
+  mapsModal.classList.remove('hidden');
+}
+document.getElementById('maps-close-btn').onclick = () => mapsModal.classList.add('hidden');
+mapsModal.addEventListener('click', e => { if (e.target === mapsModal) mapsModal.classList.add('hidden'); });
+document.getElementById('maps-nav-btn').onclick = () => {
+  document.getElementById('maps-main-actions').classList.add('maps-hidden');
+  const previous = navPoints.filter(p => p.day > 0 && (p.day < currentTarget.day || (p.day === currentTarget.day && p.point < currentTarget.point)))
+    .sort((a, b) => (b.day - a.day) || (b.point - a.point));
+  const seen = new Set(); prevList.innerHTML = '';
+  previous.forEach(p => {
+    if (seen.has(p.label)) return; seen.add(p.label);
+    const a = document.createElement('a'); a.target = '_blank'; a.rel = 'noopener';
+    a.href = DIR(p.nav, currentTarget.nav); a.textContent = `[D${p.day}] ${p.label} → ${currentTarget.label}`;
+    prevList.appendChild(a);
+  });
+  if (!previous.length) { const b = document.createElement('div'); b.className = 'disabled'; b.textContent = 'Nessun punto precedente'; prevList.appendChild(b); }
+  prevList.classList.remove('maps-hidden');
+};
+
+pianoRender();
+</script>
+
+<script>
+/* ===== PWA: icona + installazione ===== */
+(function () {
+  const ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a5c68"/><stop offset="100%" stop-color="#0a1619"/></linearGradient>
+  <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f8aa0"/><stop offset="100%" stop-color="#123c47"/></linearGradient></defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <circle cx="380" cy="150" r="54" fill="#f39a3c" opacity="0.9"/>
+  <path d="M0 330 L70 250 L150 300 L250 170 L330 260 L400 220 L512 300 L512 512 L0 512 Z" fill="#3e7d4f"/>
+  <path d="M250 170 L330 260 L330 512 L250 512 Z" fill="#2c5e3a"/>
+  <path d="M330 260 L330 512 L512 512 L512 300 L400 220 Z" fill="#1f4a2d" opacity="0.6"/>
+  <rect x="0" y="400" width="512" height="112" fill="url(#sea)"/>
+  <path d="M300 255 Q318 300 312 400 L296 400 Q302 320 292 262 Z" fill="#ffffff" opacity="0.85"/>
+  <path d="M0 430 Q40 418 80 430 T160 430 T240 430 T320 430 T400 430 T480 430 T560 430" fill="none" stroke="#fff" stroke-width="8" stroke-opacity="0.45" stroke-linecap="round"/>
+  </svg>`;
+  function rasterize(svg) {
+    return new Promise(resolve => {
+      const url = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg))), img = new Image();
+      img.onload = () => { const make = s => { try { const c = document.createElement('canvas'); c.width = c.height = s; c.getContext('2d').drawImage(img, 0, 0, s, s); return c.toDataURL('image/png'); } catch (e) { return url; } }; resolve({ svg: url, p192: make(192), p512: make(512) }); };
+      img.onerror = () => resolve({ svg: url, p192: url, p512: url });
+      img.src = url;
+    });
+  }
+  window.FAROE_ICON_SVG = ICON_SVG;
+  const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const btn = document.getElementById('install-btn'), hint = document.getElementById('ios-hint');
+  let deferredPrompt = null;
+  rasterize(ICON_SVG).then(ic => {
+    document.getElementById('fav-icon').href = ic.svg;
+    document.getElementById('install-icon').src = ic.svg;
+    if (location.protocol === 'file:') {
+      const manifest = { name: 'Fær Øer 2027', short_name: 'Fær Øer', start_url: location.href, display: 'standalone', background_color: '#0a1619', theme_color: '#1d4a55', lang: 'it',
+        icons: [{ src: ic.p192, sizes: '192x192', type: 'image/png' }, { src: ic.p512, sizes: '512x512', type: 'image/png' }] };
+      document.getElementById('app-manifest').href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' }));
+      document.getElementById('apple-icon').href = ic.p192;
+    }
+    if (isIOS() && !isStandalone() && /github\.io$/.test(location.hostname)) {
+      btn.hidden = false;
+      btn.addEventListener('click', () => { hint.innerHTML = 'Per installare: tocca <b>Condividi</b> ⬆️, poi <b>"Aggiungi alla schermata Home"</b>.'; hint.hidden = false; clearTimeout(window._hintT); window._hintT = setTimeout(() => hint.hidden = true, 6500); });
+    }
+  });
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; if (!isStandalone()) btn.hidden = false; });
+  btn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); try { await deferredPrompt.userChoice; } catch (e) {} deferredPrompt = null; btn.hidden = true; });
+  window.addEventListener('appinstalled', () => { btn.hidden = true; deferredPrompt = null; });
+})();
+</script>
+</body>
+</html>

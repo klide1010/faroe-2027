@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a5c68"/><stop offset="100%" stop-color="#0a1619"/></linearGradient>
+  <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f8aa0"/><stop offset="100%" stop-color="#123c47"/></linearGradient></defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <circle cx="380" cy="150" r="54" fill="#f39a3c" opacity="0.9"/>
+  <path d="M0 330 L70 250 L150 300 L250 170 L330 260 L400 220 L512 300 L512 512 L0 512 Z" fill="#3e7d4f"/>
+  <path d="M250 170 L330 260 L330 512 L250 512 Z" fill="#2c5e3a"/>
+  <path d="M330 260 L330 512 L512 512 L512 300 L400 220 Z" fill="#1f4a2d" opacity="0.6"/>
+  <rect x="0" y="400" width="512" height="112" fill="url(#sea)"/>
+  <path d="M300 255 Q318 300 312 400 L296 400 Q302 320 292 262 Z" fill="#ffffff" opacity="0.85"/>
+  <path d="M0 430 Q40 418 80 430 T160 430 T240 430 T320 430 T400 430 T480 430 T560 430" fill="none" stroke="#fff" stroke-width="8" stroke-opacity="0.45" stroke-linecap="round"/>
+  </svg>

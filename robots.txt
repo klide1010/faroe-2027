@@ -1,0 +1,3 @@
+# Sito privato: nessun crawler, nessun indicizzatore, nessun bot AI.
+User-agent: *
+Disallow: /
